@@ -72,6 +72,6 @@ long result = dataList.parallel().map(line -> processItem(line)).reduce(0L, (a, 
 
 
 ###Note:
-#3 I would still consider Try With Resources construct a one-liner.
-#7 This is the odd man out that does not use Java 8 construct, although it is super simple with Java for years with the help of JAXB.
-#10 I am punting on Sieve of Eratosthenes from the Scala version, which technically is not a one-liner.
+3. I would still consider Try With Resources construct a one-liner.
+7. This is the odd man out that does not use Java 8 construct, although it is super simple with Java for years with the help of JAXB.
+10. I am punting on Sieve of Eratosthenes from the Scala version, which technically is not a one-liner.
