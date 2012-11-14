@@ -3,6 +3,8 @@
 
 Here is my take using Java 8: http://mkaz.com/solog/scala/10-scala-one-liners-to-impress-your-friends.html.
 
+I am punting on Sieve of Eratosthenes from the Scala version, which technically is not a one-liner.
+
 
 ## 1. Multiple Each Item in a List by 2
 
@@ -26,7 +28,7 @@ Here is my take using Java 8: http://mkaz.com/solog/scala/10-scala-one-liners-to
     keywords.stream().fold(() -> false, (Boolean b, String keyword) -> b || tweet.contains(keyword), (l, r) -> l || r);
 ```
 
-## 4. Read in a File
+## 4. Read in a File^
 
 ```java
     try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
@@ -50,7 +52,7 @@ countTo(4).stream().map(i -> { System.out.print("Happy Birthday "); if (i == 3) 
 Map<String,Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Mappers.forPredicate((Predicate<Integer>) integer -> integer > 60, "passed", "failed"));
 ```
 
-## 7. Fetch and Parse an XML web service
+## 7. Fetch and Parse an XML web service^^
 
 ```java
     FeedType feed = JAXB.unmarshal(new URL("http://search.twitter.com/search.atom?&q=java8"), FeedType.class);
@@ -72,6 +74,6 @@ long result = dataList.parallel().map(line -> processItem(line)).reduce(0L, (a, 
 
 
 ###Note:
-3. I would still consider Try With Resources construct a one-liner.
-7. This is the odd man out that does not use Java 8 construct, although it is super simple with Java for years with the help of JAXB.
-10. I am punting on Sieve of Eratosthenes from the Scala version, which technically is not a one-liner.
+^ I would still consider Try With Resources construct a one-liner.
+
+^^ This is the odd man out that does not use Java 8 construct, although it is super simple with Java for years with the help of JAXB.
