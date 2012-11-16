@@ -9,13 +9,15 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 ## 1. Multiple Each Item in a List by 2
 
 ```java
-    countTo(10).stream().map(integer -> integer * 2).into(new ArrayList<Integer>());
+    countTo(10).stream().map((IntMapper<Integer>) i -> i * 2).toArray();
+    countTo(10).stream().map((IntMapper<Integer>) i -> i * 2).boxed().into(new ArrayList<Integer>());
 ```
 
 ## 2. Sum a List of Numbers
 
 ```java
     countTo(1000).stream().reduce(0, (x, y) -> x + y);
+    countTo(1000).stream().map((IntMapper<Integer>) i -> i).sum();
 ```
 
 ## 3. Verify if Exists in a String
