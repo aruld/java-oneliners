@@ -3,8 +3,8 @@ package oneliners;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
-import java.util.functions.Mappers;
-import java.util.functions.Predicate;
+import java.util.function.Mappers;
+import java.util.function.Predicate;
 
 /**
  * Filter list of numbers
