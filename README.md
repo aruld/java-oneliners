@@ -9,15 +9,15 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 ## 1. Multiple Each Item in a List by 2
 
 ```java
-    countTo(10).stream().map((IntMapper<Integer>) i -> i * 2).toArray();
-    countTo(10).stream().map((IntMapper<Integer>) i -> i * 2).boxed().into(new ArrayList<Integer>());
+    countTo(10).stream().map((IntFunction<Integer>) i -> i * 2).toArray();
+    countTo(10).stream().map((IntFunction<Integer>) i -> i * 2).boxed().into(new ArrayList<Integer>());
 ```
 
 ## 2. Sum a List of Numbers
 
 ```java
     countTo(1000).stream().reduce(0, (x, y) -> x + y);
-    countTo(1000).stream().map((IntMapper<Integer>) i -> i).sum();
+    countTo(1000).stream().map((IntFunction<Integer>) i -> i).sum();
 ```
 
 ## 3. Verify if Exists in a String
@@ -45,13 +45,13 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 ## 5. Happy Birthday to You!
 
 ```java
-countTo(4).stream().map(i -> { System.out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(System.out::println);
+    countTo(4).stream().map(i -> { System.out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(System.out::println);
 ```
 
 ## 6. Filter list of numbers
 
 ```java
-Map<String,Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Mappers.forPredicate((Predicate<Integer>) integer -> integer > 60, "passed", "failed"));
+    Map<String,Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Functions.forPredicate((Predicate<Integer>) integer -> integer > 60, "passed", "failed"));
 ```
 
 ## 7. Fetch and Parse an XML web service^^
@@ -71,7 +71,7 @@ Map<String,Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).s
 ## 9. Parallel Processing
 
 ```java
-long result = dataList.parallel().map(line -> processItem(line)).reduce(0L, (a, b) -> a + b);
+    long result = dataList.parallel().map(line -> processItem(line)).reduce(0L, (a, b) -> a + b);
 ```
 
 
