@@ -16,7 +16,7 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 ## 2. Sum a List of Numbers
 
 ```java
-    countTo(1000).stream().reduce(0, (x, y) -> x + y);
+    countTo(1000).stream().reduce(Integer::sum).get();
     countTo(1000).stream().map((IntFunction<Integer>) i -> i).sum();
 ```
 
@@ -51,7 +51,7 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 ## 6. Filter list of numbers
 
 ```java
-    Map<String,Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Functions.forPredicate((Predicate<Integer>) integer -> integer > 60, "passed", "failed"));
+    Map<String,Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Functions.forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed"));
 ```
 
 ## 7. Fetch and Parse an XML web service^^
@@ -64,8 +64,8 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 ## 8. Find minimum (or maximum) in a List
 
 ```java
-    int min = Arrays.asList(14, 35, -7, 46, 98).stream().reduce((a, b) -> (a <= b) ? a : b).get();
-    int max = Arrays.asList(14, 35, -7, 46, 98).stream().reduce((a, b) -> (a >= b) ? a : b).get();
+    int min = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::min).get();
+    int max = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::max).get();
 ```
 
 ## 9. Parallel Processing
