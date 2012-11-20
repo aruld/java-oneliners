@@ -1,9 +1,9 @@
-9 Java One Liners to Impress Your Friends
-=========================================
+10 Java One Liners to Impress Your Friends
+==========================================
 
 Here is my take using Java 8: http://mkaz.com/solog/scala/10-scala-one-liners-to-impress-your-friends.html.
 
-I am punting on Sieve of Eratosthenes from the Scala version, which technically is not a one-liner.
+I am replacing Sieve of Eratosthenes with LINQ style builder as the former is technically not a one-liner in Scala.
 
 
 ## 1. Multiple Each Item in a List by 2
@@ -75,6 +75,15 @@ I am punting on Sieve of Eratosthenes from the Scala version, which technically 
 
 ```java
     long result = dataList.parallel().map(line -> processItem(line)).reduce(0L, (a, b) -> a + b);
+```
+
+## 10. Ad-hoc queries over collections (LINQ in Java)
+
+```java
+    List<Album> sortedFavs = albums.stream()
+        .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
+        .sorted(comparing((Function<Album, String>) album -> album.name))
+        .into(new ArrayList<Album>());
 ```
 
 
