@@ -45,7 +45,7 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 5. Happy Birthday to You!
 
 ```java
-    countTo(4).stream().map(i -> { System.out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(System.out::println);
+    countTo(4).stream().map(i -> { out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(out::println);
 ```
 
 ## 6. Filter list of numbers
