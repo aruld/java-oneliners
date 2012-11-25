@@ -16,9 +16,9 @@ public class Item9 {
     }
   }
 
-  public static long processItem(LineItem item) {
+  public static int processItem(LineItem item) {
     //perform cpu intensive task
-    return 1L;
+    return 1;
   }
 
   public static void main(String[] args) {
@@ -41,7 +41,6 @@ public class Item9 {
       }
     };
 
-    long result = dataList.parallel().map(line -> processItem(line)).reduce(0L, (a, b) -> a + b);
-
+    int result = dataList.parallel().map(line -> processItem(line)).sum();
   }
 }

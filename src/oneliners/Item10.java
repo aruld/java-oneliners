@@ -9,7 +9,7 @@ import static java.util.Comparators.comparing;
 
 /**
  * Find the names of albums that have at least one track rated four or higher, sorted by name.
- *
+ * <p/>
  * Reference: http://cr.openjdk.java.net/~briangoetz/lambda/sotc3.html
  */
 public class Item10 {
@@ -101,9 +101,9 @@ public class Item10 {
     List<Album> albums = Arrays.asList(unapologetic, tailgates, red);
 
     List<Album> sortedFavs = albums.stream()
-        .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
-        .sorted(comparing((Function<Album, String>) album -> album.name))
-        .into(new ArrayList<Album>());
+      .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
+      .sorted(comparing((Function<Album, String>) album -> album.name))
+      .into(new ArrayList<Album>());
 
     sortedFavs.stream().forEach(album -> System.out.println(album.name));
 
