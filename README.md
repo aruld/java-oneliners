@@ -9,15 +9,15 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 1. Multiple Each Item in a List by 2
 
 ```java
-    countTo(10).stream().map((IntFunction<Integer>) i -> i * 2).toArray();
-    countTo(10).stream().map((IntFunction<Integer>) i -> i * 2).boxed().into(new ArrayList<Integer>());
+    countTo(10).stream().map(i -> i * 2).toArray();
+    countTo(10).stream().map(i -> i * 2).boxed().into(new ArrayList<Integer>());
 ```
 
 ## 2. Sum a List of Numbers
 
 ```java
     countTo(1000).stream().reduce(Integer::sum).get();
-    countTo(1000).stream().map((IntFunction<Integer>) i -> i).sum();
+    countTo(1000).stream().map(i -> (int) i).sum();
 ```
 
 ## 3. Verify if Exists in a String
