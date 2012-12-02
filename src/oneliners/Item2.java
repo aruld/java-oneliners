@@ -9,7 +9,7 @@ public class Item2 {
 
   public static void main(String[] args) {
     countTo(1000).stream().reduce(Integer::sum).get();
-    countTo(1000).stream().map(i -> (int) i).sum();
+    countTo(1000).stream().map(Integer::intValue).sum();
   }
 
 }

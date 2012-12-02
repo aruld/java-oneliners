@@ -17,7 +17,7 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 
 ```java
     countTo(1000).stream().reduce(Integer::sum).get();
-    countTo(1000).stream().map(i -> (int) i).sum();
+    countTo(1000).stream().map(Integer::intValue).sum();
 ```
 
 ## 3. Verify if Exists in a String
