@@ -1,6 +1,6 @@
 package oneliners;
 
-import static oneliners.Util.countTo;
+import static java.util.stream.primitive.Primitives.range;
 
 /**
  * Sum a List of Numbers
@@ -8,8 +8,8 @@ import static oneliners.Util.countTo;
 public class Item2 {
 
   public static void main(String[] args) {
-    countTo(1000).stream().reduce(Integer::sum).get();
-    countTo(1000).stream().map(Integer::intValue).sum();
+    range(1, 1001).sum();
+    range(1, 1001).reduce(0, Integer::sum);
   }
 
 }

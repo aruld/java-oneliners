@@ -9,15 +9,15 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 1. Multiple Each Item in a List by 2
 
 ```java
-    countTo(10).stream().map(i -> i * 2).toArray();
-    countTo(10).stream().map(i -> i * 2).boxed().into(new ArrayList<Integer>());
+    range(1, 11).map(i -> i * 2).toArray();
+    range(1, 11).map(i -> i * 2).boxed().into(new ArrayList<>());
 ```
 
 ## 2. Sum a List of Numbers
 
 ```java
-    countTo(1000).stream().reduce(Integer::sum).get();
-    countTo(1000).stream().map(Integer::intValue).sum();
+    range(1, 1001).reduce(0, Integer::sum);
+    range(1, 1001).sum();
 ```
 
 ## 3. Verify if Exists in a String
@@ -27,7 +27,7 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
     final String tweet = "The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml";
 
     keywords.stream().anyMatch(tweet::contains);
-    keywords.stream().fold(() -> false, (Boolean b, String keyword) -> b || tweet.contains(keyword), (l, r) -> l || r);
+    keywords.stream().reduce(false, (Boolean b, String keyword) -> b || tweet.contains(keyword), (l, r) -> l || r);
 ```
 
 ## 4. Read in a File^
@@ -45,7 +45,7 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 5. Happy Birthday to You!
 
 ```java
-    countTo(4).stream().map(i -> { out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(out::println);
+    range(1, 5).boxed().map(i -> { out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(out::println);
 ```
 
 ## 6. Filter list of numbers
