@@ -2,7 +2,7 @@ package oneliners;
 
 import java.util.ArrayList;
 
-import static java.util.stream.primitive.Primitives.range;
+import static java.util.stream.primitive.PrimitiveStreams.range;
 
 /**
  * Multiple Each Item in a List by 2

@@ -3,8 +3,10 @@ package oneliners;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
-import java.util.function.Functions;
 import java.util.function.Predicate;
+
+import static java.util.function.Functions.forPredicate;
+import static java.util.stream.reduce.Tabulators.groupBy;
 
 /**
  * Filter list of numbers
@@ -12,7 +14,7 @@ import java.util.function.Predicate;
 public class Item6 {
 
   public static void main(String[] args) {
-    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Functions.forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed"));
+    Map<String, Collection<Integer>> result =  Arrays.asList(49, 58, 76, 82, 88, 90).stream().tabulate(groupBy(forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed")));
   }
 
 }

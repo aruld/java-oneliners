@@ -51,7 +51,7 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 6. Filter list of numbers
 
 ```java
-    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().groupBy(Functions.forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed"));
+    Map<String, Collection<Integer>> result =  Arrays.asList(49, 58, 76, 82, 88, 90).stream().tabulate(groupBy(forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed")));
 ```
 
 ## 7. Fetch and Parse an XML web service^^
@@ -74,7 +74,7 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 9. Parallel Processing
 
 ```java
-    int result = dataList.parallel().map(line -> processItem(line)).sum();
+    int result = dataList.parallelStream().map(line -> processItem(line)).sum();
 ```
 
 ## 10. Ad-hoc queries over collections (LINQ in Java)

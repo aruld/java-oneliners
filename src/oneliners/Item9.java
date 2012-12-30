@@ -41,6 +41,6 @@ public class Item9 {
       }
     };
 
-    int result = dataList.parallel().map(line -> processItem(line)).sum();
+    int result = dataList.parallelStream().map(line -> processItem(line)).sum();
   }
 }

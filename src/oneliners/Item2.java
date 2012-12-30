@@ -1,6 +1,6 @@
 package oneliners;
 
-import static java.util.stream.primitive.Primitives.range;
+import static java.util.stream.primitive.PrimitiveStreams.range;
 
 /**
  * Sum a List of Numbers

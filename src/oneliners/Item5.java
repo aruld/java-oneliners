@@ -1,7 +1,7 @@
 package oneliners;
 
 import static java.lang.System.out;
-import static java.util.stream.primitive.Primitives.range;
+import static java.util.stream.primitive.PrimitiveStreams.range;
 
 /**
  * Happy Birthday to You!
