@@ -66,9 +66,11 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ```java
     int min = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::min).get();
     min = Arrays.asList(14, 35, -7, 46, 98).stream().min(Integer::compare).get();
+    min = PrimitiveStreams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).min().getAsInt();
 
     int max = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::max).get();
     max = Arrays.asList(14, 35, -7, 46, 98).stream().max(Integer::compare).get();
+    max = PrimitiveStreams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).max().getAsInt();
 ```
 
 ## 9. Parallel Processing
@@ -84,6 +86,9 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
       .sorted(comparing((Function<Album, String>) album -> album.name))
       .into(new ArrayList<Album>());
+
+    // Group album tracks by rating
+    Map<Integer, Collection<Track>> tracksByRating = tracks.stream().tabulate(Tabulators.<Track, Integer>groupBy(Track::getRating));
 ```
 
 

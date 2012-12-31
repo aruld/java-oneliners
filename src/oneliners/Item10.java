@@ -1,9 +1,8 @@
 package oneliners;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.reduce.Tabulators;
 
 import static java.util.Comparators.comparing;
 
@@ -45,6 +44,10 @@ public class Item10 {
     @Override
     public int compareTo(Track track) {
       return this.name.compareTo(track.name);
+    }
+
+    public int getRating() {
+      return rating;
     }
   }
 
@@ -107,6 +110,10 @@ public class Item10 {
 
     sortedFavs.stream().forEach(album -> System.out.println(album.name));
 
+    // Group album tracks by rating
+    final List<Track> tracks = new ArrayList<>();
+    albums.stream().forEach(album -> tracks.addAll(album.tracks));
+    Map<Integer, Collection<Track>> tracksByRating = tracks.stream().tabulate(Tabulators.<Track, Integer>groupBy(Track::getRating));
   }
 
 }
