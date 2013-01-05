@@ -2,16 +2,18 @@ package oneliners;
 
 import java.util.ArrayList;
 
-import static java.util.stream.primitive.PrimitiveStreams.range;
+import static java.util.stream.Streams.intRange;
+
 
 /**
- * Multiple Each Item in a List by 2
+ * Multiple Each Item in a List by 2.
  */
 public class Item1 {
 
   public static void main(String[] args) {
-    range(1, 11).map(i -> i * 2).toArray();
-    range(1, 11).map(i -> i * 2).boxed().into(new ArrayList<>());
+    // Range is half-open (exclusive) in Java, unlike Scala.
+    intRange(1, 10).map(i -> i * 2).toArray();
+    intRange(1, 10).map(i -> i * 2).boxed().into(new ArrayList<>());
   }
 
 }

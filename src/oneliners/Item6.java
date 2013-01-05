@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import static java.util.function.Functions.forPredicate;
-import static java.util.stream.reduce.Tabulators.groupBy;
+import static java.util.stream.Accumulators.groupBy;
 
 /**
  * Filter list of numbers
@@ -14,7 +14,7 @@ import static java.util.stream.reduce.Tabulators.groupBy;
 public class Item6 {
 
   public static void main(String[] args) {
-    Map<String, Collection<Integer>> result =  Arrays.asList(49, 58, 76, 82, 88, 90).stream().tabulate(groupBy(forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed")));
+    Map<String, Collection<Integer>> result =  Arrays.asList(49, 58, 76, 82, 88, 90).stream().accumulate(groupBy(forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed")));
   }
 
 }

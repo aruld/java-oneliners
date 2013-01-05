@@ -2,9 +2,10 @@ package oneliners;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.reduce.Tabulators;
+import java.util.stream.Accumulators;
 
 import static java.util.Comparators.comparing;
+import static java.util.function.MultiFunction.Collector;
 
 /**
  * Find the names of albums that have at least one track rated four or higher, sorted by name.
@@ -103,6 +104,7 @@ public class Item10 {
 
     List<Album> albums = Arrays.asList(unapologetic, tailgates, red);
 
+    // Find all tracks that has rating >= 4
     List<Album> sortedFavs = albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
       .sorted(comparing((Function<Album, String>) album -> album.name))
@@ -111,9 +113,7 @@ public class Item10 {
     sortedFavs.stream().forEach(album -> System.out.println(album.name));
 
     // Group album tracks by rating
-    final List<Track> tracks = new ArrayList<>();
-    albums.stream().forEach(album -> tracks.addAll(album.tracks));
-    Map<Integer, Collection<Track>> tracksByRating = tracks.stream().tabulate(Tabulators.<Track, Integer>groupBy(Track::getRating));
+    Map<Integer, Collection<Track>> tracksByRating = albums.stream().mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks)).accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
   }
 
 }

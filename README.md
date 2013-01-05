@@ -9,15 +9,15 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 1. Multiple Each Item in a List by 2
 
 ```java
-    range(1, 11).map(i -> i * 2).toArray();
-    range(1, 11).map(i -> i * 2).boxed().into(new ArrayList<>());
+    intRange(1, 10).map(i -> i * 2).toArray();
+    intRange(1, 10).map(i -> i * 2).boxed().into(new ArrayList<>());
 ```
 
 ## 2. Sum a List of Numbers
 
 ```java
-    range(1, 1001).reduce(0, Integer::sum);
-    range(1, 1001).sum();
+    intRange(1, 1000).sum();
+    intRange(1, 1000).reduce(0, Integer::sum);
 ```
 
 ## 3. Verify if Exists in a String
@@ -45,13 +45,13 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 5. Happy Birthday to You!
 
 ```java
-    range(1, 5).boxed().map(i -> { out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(out::println);
+    intRange(1, 5).boxed().map(i -> { out.print("Happy Birthday "); if (i == 3) return "dear NAME"; else return "to You"; }).forEach(out::println);
 ```
 
 ## 6. Filter list of numbers
 
 ```java
-    Map<String, Collection<Integer>> result =  Arrays.asList(49, 58, 76, 82, 88, 90).stream().tabulate(groupBy(forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed")));
+    Map<String, Collection<Integer>> result =  Arrays.asList(49, 58, 76, 82, 88, 90).stream().accumulate(groupBy(forPredicate((Predicate<Integer>) i -> i > 60, "passed", "failed")));
 ```
 
 ## 7. Fetch and Parse an XML web service^^
@@ -66,11 +66,11 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ```java
     int min = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::min).get();
     min = Arrays.asList(14, 35, -7, 46, 98).stream().min(Integer::compare).get();
-    min = PrimitiveStreams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).min().getAsInt();
+    min = Streams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).min().getAsInt();
 
     int max = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::max).get();
     max = Arrays.asList(14, 35, -7, 46, 98).stream().max(Integer::compare).get();
-    max = PrimitiveStreams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).max().getAsInt();
+    max = Streams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).max().getAsInt();
 ```
 
 ## 9. Parallel Processing
@@ -82,13 +82,14 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 10. Ad-hoc queries over collections (LINQ in Java)
 
 ```java
+    // Find all tracks that has rating >= 4
     List<Album> sortedFavs = albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
       .sorted(comparing((Function<Album, String>) album -> album.name))
       .into(new ArrayList<Album>());
 
     // Group album tracks by rating
-    Map<Integer, Collection<Track>> tracksByRating = tracks.stream().tabulate(Tabulators.<Track, Integer>groupBy(Track::getRating));
+    Map<Integer, Collection<Track>> tracksByRating = albums.stream().mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks)).accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
 ```
 
 
