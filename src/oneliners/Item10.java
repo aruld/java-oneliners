@@ -104,7 +104,7 @@ public class Item10 {
 
     List<Album> albums = Arrays.asList(unapologetic, tailgates, red);
 
-    // Find all tracks that has rating >= 4
+    // Find the names of albums that have at least one track rated four or higher, sorted by name.
     List<Album> sortedFavs = albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
       .sorted(comparing((Function<Album, String>) album -> album.name))
@@ -113,7 +113,9 @@ public class Item10 {
     sortedFavs.stream().forEach(album -> System.out.println(album.name));
 
     // Group album tracks by rating
-    Map<Integer, Collection<Track>> tracksByRating = albums.stream().mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks)).accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
+    Map<Integer, Collection<Track>> tracksByRating = albums.stream()
+      .mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks))
+      .accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
   }
 
 }

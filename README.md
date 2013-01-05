@@ -82,14 +82,16 @@ I am replacing Sieve of Eratosthenes with LINQ style builder as the former is te
 ## 10. Ad-hoc queries over collections (LINQ in Java)
 
 ```java
-    // Find all tracks that has rating >= 4
+    // Find the names of albums that have at least one track rated four or higher, sorted by name.
     List<Album> sortedFavs = albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
       .sorted(comparing((Function<Album, String>) album -> album.name))
       .into(new ArrayList<Album>());
 
     // Group album tracks by rating
-    Map<Integer, Collection<Track>> tracksByRating = albums.stream().mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks)).accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
+    Map<Integer, Collection<Track>> tracksByRating = albums.stream()
+      .mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks))
+      .accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
 ```
 
 
