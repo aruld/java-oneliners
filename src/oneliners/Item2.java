@@ -1,6 +1,8 @@
 package oneliners;
 
 
+import java.util.stream.Streams;
+
 import static java.util.stream.Streams.intRange;
 
 /**
@@ -12,6 +14,7 @@ public class Item2 {
     // Range is half-open (exclusive) in Java, unlike Scala.
     intRange(1, 1000).sum();
     intRange(1, 1000).reduce(0, Integer::sum);
+    Streams.iterateInt(0, i -> i + 1).limit(1000).reduce(0, Integer::sum);
   }
 
 }

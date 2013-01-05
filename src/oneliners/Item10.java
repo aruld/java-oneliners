@@ -1,7 +1,6 @@
 package oneliners;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Accumulators;
 
 import static java.util.Comparators.comparing;
@@ -104,17 +103,19 @@ public class Item10 {
 
     List<Album> albums = Arrays.asList(unapologetic, tailgates, red);
 
-    // Find the names of albums that have at least one track rated four or higher, sorted by name.
-    List<Album> sortedFavs = albums.stream()
+    // Print the names of albums that have at least one track rated four or higher, sorted by name.
+    albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
-      .sorted(comparing((Function<Album, String>) album -> album.name))
-      .into(new ArrayList<Album>());
+      .sorted(comparing((Album album) -> album.name))
+      .forEach(album -> System.out.println(album.name));
 
-    sortedFavs.stream().forEach(album -> System.out.println(album.name));
+    // Merge tracks from all albums
+    List<Track> allTracks = albums.stream()
+      .mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks))
+      .into(new ArrayList<Track>());
 
     // Group album tracks by rating
-    Map<Integer, Collection<Track>> tracksByRating = albums.stream()
-      .mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks))
+    Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
       .accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
   }
 
