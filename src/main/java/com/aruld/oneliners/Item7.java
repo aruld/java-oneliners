@@ -1,4 +1,4 @@
-package oneliners;
+package com.aruld.oneliners;
 
 import org.w3._2005.atom.FeedType;
 

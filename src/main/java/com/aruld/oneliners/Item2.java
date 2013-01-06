@@ -1,4 +1,4 @@
-package oneliners;
+package com.aruld.oneliners;
 
 
 import java.util.stream.Streams;

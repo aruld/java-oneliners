@@ -1,4 +1,4 @@
-package oneliners;
+package com.aruld.oneliners;
 
 import static java.lang.System.out;
 import static java.util.stream.Streams.intRange;
