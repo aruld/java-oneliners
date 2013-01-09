@@ -1,7 +1,7 @@
 package com.aruld.oneliners;
 
 import java.util.*;
-import java.util.stream.Accumulators;
+import java.util.stream.Reducers;
 
 import static java.util.Comparators.comparing;
 import static java.util.function.MultiFunction.Collector;
@@ -116,7 +116,7 @@ public class Item10 {
 
     // Group album tracks by rating
     Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
-      .accumulate(Accumulators.<Track, Integer>groupBy(Track::getRating));
+      .reduce(Reducers.<Track, Integer>groupBy(Track::getRating));
   }
 
 }

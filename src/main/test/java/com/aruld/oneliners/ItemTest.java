@@ -8,15 +8,21 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.*;
+import java.util.function.MultiFunction;
+import java.util.stream.Reducers;
 import java.util.stream.StreamOpFlag;
 import java.util.stream.Streams;
 
 import static java.util.function.Functions.forPredicate;
-import static java.util.stream.Accumulators.groupBy;
+import static java.util.Comparators.comparing;
+import static java.util.stream.Reducers.groupBy;
 import static java.util.stream.Streams.intRange;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
+
+import static com.aruld.oneliners.Item10.Album;
+import static com.aruld.oneliners.Item10.Track;
 
 public class ItemTest {
 
@@ -68,7 +74,7 @@ public class ItemTest {
 
   @Test
   public void item6() {
-    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().accumulate(groupBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
+    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().reduce(groupBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);
@@ -90,6 +96,79 @@ public class ItemTest {
     assertEquals(max, 98);
     max = Streams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).max().getAsInt();
     assertEquals(max, 98);
+  }
+
+  @Test
+  public void item10() {
+    Album tailgates = new Album("Tailgates & Tanlines", "Luke Bryan");
+    tailgates.tracks.add(new Track("Country Girl (Shake It for Me)", 5));
+    tailgates.tracks.add(new Track("Kiss Tomorrow Goodbye", 5));
+    tailgates.tracks.add(new Track("Drunk On You", 4));
+    tailgates.tracks.add(new Track("Too Damn Young", 4));
+    tailgates.tracks.add(new Track("I Don't Want This Night to End", 4));
+    tailgates.tracks.add(new Track("You Don't Know Jack", 4));
+    tailgates.tracks.add(new Track("Harvest Time", 3));
+    tailgates.tracks.add(new Track("I Know You're Gonna Be There", 3));
+    tailgates.tracks.add(new Track("Muckalee Creek Water", 3));
+    tailgates.tracks.add(new Track("Tailgate Blues", 3));
+    tailgates.tracks.add(new Track("Been There, Done That", 3));
+    tailgates.tracks.add(new Track("Faded Away", 3));
+    tailgates.tracks.add(new Track("I Knew You That Way", 3));
+
+    Album unapologetic = new Album("Unapologetic", "Rihanna");
+    unapologetic.tracks.add(new Track("Phresh Out the Runway", 5));
+    unapologetic.tracks.add(new Track("Diamonds", 3));
+    unapologetic.tracks.add(new Track("Numb", 3));
+    unapologetic.tracks.add(new Track("Pour It Up", 3));
+    unapologetic.tracks.add(new Track("Loveeeeeee Song", 4));
+    unapologetic.tracks.add(new Track("Jump", 4));
+    unapologetic.tracks.add(new Track("Right Now", 4));
+    unapologetic.tracks.add(new Track("What Now", 4));
+    unapologetic.tracks.add(new Track("Stay", 4));
+    unapologetic.tracks.add(new Track("Nobody's Business", 5));
+    unapologetic.tracks.add(new Track("Love Without Tragedy", 5));
+    unapologetic.tracks.add(new Track("Get It Over With", 5));
+    unapologetic.tracks.add(new Track("No Love Allowed", 3));
+    unapologetic.tracks.add(new Track("Lost In Paradise", 5));
+
+    Album red = new Album("Red", "Taylor Swift");
+    red.tracks.add(new Track("State of Grace", 4));
+    red.tracks.add(new Track("Red", 4));
+    red.tracks.add(new Track("Treacherous", 4));
+    red.tracks.add(new Track("I Knew You Were Trouble", 5));
+    red.tracks.add(new Track("All Too Well", 3));
+    red.tracks.add(new Track("22", 3));
+    red.tracks.add(new Track("I Almost Do", 3));
+    red.tracks.add(new Track("We Are Never Ever Getting Back", 3));
+    red.tracks.add(new Track("Stay Stay Stay", 5));
+    red.tracks.add(new Track("The Last Time", 5));
+    red.tracks.add(new Track("Holy Ground", 3));
+    red.tracks.add(new Track("Sad Beautiful Tragic", 3));
+    red.tracks.add(new Track("The Lucky One", 4));
+    red.tracks.add(new Track("Everything Has Changed", 3));
+    red.tracks.add(new Track("Starlight", 4));
+    red.tracks.add(new Track("Begin Again", 3));
+
+    List<Album> albums = Arrays.asList(unapologetic, tailgates, red);
+
+    // Print the names of albums that have at least one track rated four or higher, sorted by name.
+    Assert.assertEquals(albums.stream()
+      .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
+      .sorted(comparing((Album album) -> album.name))
+      .map(a -> a.name).into(new ArrayList<String>()), Arrays.asList("Red", "Tailgates & Tanlines", "Unapologetic"));
+
+    // Merge tracks from all albums
+    List<Track> allTracks = albums.stream()
+      .mapMulti((MultiFunction.Collector<Track> collector, Album element) -> collector.yield(element.tracks))
+      .into(new ArrayList<Track>());
+    Assert.assertEquals(allTracks.size(), 43);
+
+    // Group album tracks by rating
+    Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
+      .reduce(Reducers.<Track, Integer>groupBy(Track::getRating));
+    Assert.assertEquals(tracksByRating.get(3).size(), 19);
+    Assert.assertEquals(tracksByRating.get(4).size(), 14);
+    Assert.assertEquals(tracksByRating.get(5).size(), 10);
   }
 
 }
