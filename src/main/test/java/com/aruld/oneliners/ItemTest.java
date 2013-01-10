@@ -8,14 +8,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.*;
-import java.util.function.MultiFunction;
-import java.util.stream.Reducers;
+import java.util.function.Multifunction;
+import java.util.stream.Collectors;
 import java.util.stream.StreamOpFlag;
 import java.util.stream.Streams;
 
 import static java.util.function.Functions.forPredicate;
 import static java.util.Comparators.comparing;
-import static java.util.stream.Reducers.groupBy;
+import static java.util.stream.Collectors.groupBy;
 import static java.util.stream.Streams.intRange;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
@@ -31,7 +31,7 @@ public class ItemTest {
     int[] actual = intRange(1, 10).map(i -> i * 2).toArray();
     int[] expected = new int[]{2, 4, 6, 8, 10, 12, 14, 16, 18};
     assertArrayEquals(actual, expected);
-    List<Integer> actualList = intRange(1, 10).map(i -> i * 2).boxed().into(new ArrayList<Integer>());
+    List<Integer> actualList = intRange(1, 10).map(i -> i * 2).boxed().collect(Collectors.<Integer>toList());
     List<Integer> expectedList = Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18);
     Assert.assertEquals(actualList, expectedList);
   }
@@ -67,14 +67,14 @@ public class ItemTest {
     }
 
     try (BufferedReader reader = new BufferedReader(new FileReader(data))) {
-      List<String> fileLines = reader.lines().into(new LinkedList<String>());
+      List<String> fileLines = reader.lines().collect(Collectors.toCollection(() -> new LinkedList<String>()));
       assertEquals(fileLines, expected);
     }
   }
 
   @Test
   public void item6() {
-    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().reduce(groupBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
+    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);
@@ -155,17 +155,17 @@ public class ItemTest {
     Assert.assertEquals(albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
       .sorted(comparing((Album album) -> album.name))
-      .map(a -> a.name).into(new ArrayList<String>()), Arrays.asList("Red", "Tailgates & Tanlines", "Unapologetic"));
+      .map(a -> a.name).collect(Collectors.<String>toList()), Arrays.asList("Red", "Tailgates & Tanlines", "Unapologetic"));
 
     // Merge tracks from all albums
     List<Track> allTracks = albums.stream()
-      .mapMulti((MultiFunction.Collector<Track> collector, Album element) -> collector.yield(element.tracks))
-      .into(new ArrayList<Track>());
+      .mapMulti((Multifunction.Downstream<Track> downstream, Album element) -> downstream.yield(element.tracks))
+      .collect(Collectors.<Track>toList());
     Assert.assertEquals(allTracks.size(), 43);
 
     // Group album tracks by rating
     Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
-      .reduce(Reducers.<Track, Integer>groupBy(Track::getRating));
+      .collect(Collectors.<Track, Integer>groupBy(Track::getRating));
     Assert.assertEquals(tracksByRating.get(3).size(), 19);
     Assert.assertEquals(tracksByRating.get(4).size(), 14);
     Assert.assertEquals(tracksByRating.get(5).size(), 10);

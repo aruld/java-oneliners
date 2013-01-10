@@ -1,10 +1,10 @@
 package com.aruld.oneliners;
 
 import java.util.*;
-import java.util.stream.Reducers;
+import java.util.function.Multifunction.Downstream;
+import java.util.stream.Collectors;
 
 import static java.util.Comparators.comparing;
-import static java.util.function.MultiFunction.Collector;
 
 /**
  * Find the names of albums that have at least one track rated four or higher, sorted by name.
@@ -111,12 +111,12 @@ public class Item10 {
 
     // Merge tracks from all albums
     List<Track> allTracks = albums.stream()
-      .mapMulti((Collector<Track> collector, Album element) -> collector.yield(element.tracks))
-      .into(new ArrayList<Track>());
+      .mapMulti((Downstream<Track> downstream, Album element) -> downstream.yield(element.tracks))
+      .collect(Collectors.<Track>toList());
 
     // Group album tracks by rating
     Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
-      .reduce(Reducers.<Track, Integer>groupBy(Track::getRating));
+      .collect(Collectors.<Track, Integer>groupBy(Track::getRating));
   }
 
 }
