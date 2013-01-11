@@ -16,7 +16,7 @@ I hope these changes get settle down fairly soon, as milestone M6 deadline appro
 
 Check out the latest API docs [here](http://aruld.info/dev/java/api/)
 
-Download the latest API [40 MB zip](http://aruld.info/dev/java/lambda-8-b72+-apidocs-10_jan_2013.zip)
+Download the latest API [40 MB zip](http://aruld.info/dev/java/lambda-8-b73-apidocs-10_jan_2013.zip)
 
 I use the best IDE in the Java world (Intellij 12) to develop these samples. It has incredible support for lambda and you'll never be disappointed.
 

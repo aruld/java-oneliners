@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.*;
-import java.util.function.Multifunction;
 import java.util.stream.Collectors;
+import java.util.stream.Stream.Downstream;
 import java.util.stream.StreamOpFlag;
 import java.util.stream.Streams;
 
@@ -41,6 +41,7 @@ public class ItemTest {
     int expected = 499500;
     assertEquals(intRange(1, 1000).sum(), expected);
     assertEquals(intRange(1, 1000).reduce(0, Integer::sum), expected);
+    assertEquals(Streams.iterate(0, i -> i + 1).limit(1000).reduce(0, Integer::sum).intValue(), expected);
     assertEquals(Streams.iterateInt(0, i -> i + 1).limit(1000).reduce(0, Integer::sum), expected);
   }
 
@@ -159,7 +160,7 @@ public class ItemTest {
 
     // Merge tracks from all albums
     List<Track> allTracks = albums.stream()
-      .mapMulti((Multifunction.Downstream<Track> downstream, Album element) -> downstream.yield(element.tracks))
+      .explode((Downstream<Track> downstream, Album element) -> downstream.send(element.tracks))
       .collect(Collectors.<Track>toList());
     Assert.assertEquals(allTracks.size(), 43);
 

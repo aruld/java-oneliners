@@ -1,8 +1,8 @@
 package com.aruld.oneliners;
 
 import java.util.*;
-import java.util.function.Multifunction.Downstream;
 import java.util.stream.Collectors;
+import java.util.stream.Stream.Downstream;
 
 import static java.util.Comparators.comparing;
 
@@ -111,7 +111,7 @@ public class Item10 {
 
     // Merge tracks from all albums
     List<Track> allTracks = albums.stream()
-      .mapMulti((Downstream<Track> downstream, Album element) -> downstream.yield(element.tracks))
+      .explode((Downstream<Track> downstream, Album element) -> downstream.send(element.tracks))
       .collect(Collectors.<Track>toList());
 
     // Group album tracks by rating
