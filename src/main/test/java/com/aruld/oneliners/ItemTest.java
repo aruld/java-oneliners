@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream.Downstream;
-import java.util.stream.StreamOpFlag;
 import java.util.stream.Streams;
 
 import static java.util.function.Functions.forPredicate;
@@ -88,14 +87,10 @@ public class ItemTest {
     assertEquals(min, -7);
     min = Arrays.asList(14, 35, -7, 46, 98).stream().min(Integer::compare).get();
     assertEquals(min, -7);
-    min = Streams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).min().getAsInt();
-    assertEquals(min, -7);
 
     int max = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::max).get();
     assertEquals(max, 98);
     max = Arrays.asList(14, 35, -7, 46, 98).stream().max(Integer::compare).get();
-    assertEquals(max, 98);
-    max = Streams.intStream(Arrays.spliterator(new int[]{14, 35, -7, 46, 98}), StreamOpFlag.IS_SIZED).max().getAsInt();
     assertEquals(max, 98);
   }
 
