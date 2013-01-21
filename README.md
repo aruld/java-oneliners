@@ -16,7 +16,7 @@ I hope these changes get settle down fairly soon, as milestone M6 deadline appro
 
 Check out the latest API docs [here](http://download.java.net/lambda/b73/docs/api/)
 
-Download the latest API [40 MB zip](http://download.java.net/lambda/b73/lambda-8-b73-apidocs-14_jan_2013.zip)
+Download the latest API [42 MB zip](http://download.java.net/lambda/b73/lambda-8-b73-apidocs-14_jan_2013.zip)
 
 I use the best IDE in the Java world (Intellij 12) to develop these samples. It has incredible support for lambda and you'll never be disappointed.
 
