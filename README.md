@@ -14,9 +14,9 @@ The project uses bleeding edge builds of JDK 8 [lambdas](http://openjdk.java.net
 I am trying to put best effort in making the code up-to-date with the latest JDK 8 Collections lambdafication effort.
 I hope these changes get settle down fairly soon, as milestone M6 deadline approaches which would be feature complete.
 
-Check out the latest API docs [here](http://download.java.net/lambda/b73/docs/api/)
+Check out the latest API docs [here](http://download.java.net/lambda/b74/docs/api/)
 
-Download the latest API [43 MB zip](http://download.java.net/lambda/b73/lambda-8-b73-apidocs-14_jan_2013.zip)
+Download the latest API [43 MB zip](http://www.java.net/download/lambda/b74/lambda-8-b74-apidocs-21_jan_2013.zip)
 
 Download the latest build [here](http://jdk8.java.net/lambda/)
 
