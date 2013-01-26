@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Stream.Downstream;
 
 import static java.util.Comparators.comparing;
-import static java.util.stream.Collectors.groupBy;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -117,7 +117,7 @@ public class Item10 {
 
     // Group album tracks by rating
     Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
-      .collect(groupBy(Track::getRating));
+      .collect(groupingBy(Track::getRating));
   }
 
 }

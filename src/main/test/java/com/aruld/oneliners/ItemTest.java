@@ -13,7 +13,7 @@ import java.util.stream.Streams;
 
 import static java.util.Comparators.comparing;
 import static java.util.function.Functions.forPredicate;
-import static java.util.stream.Collectors.groupBy;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Streams.intRange;
@@ -75,7 +75,7 @@ public class ItemTest {
 
   @Test
   public void item6() {
-    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
+    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);
@@ -162,7 +162,7 @@ public class ItemTest {
 
     // Group album tracks by rating
     Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
-      .collect(groupBy(Track::getRating));
+      .collect(groupingBy(Track::getRating));
     Assert.assertEquals(tracksByRating.get(3).size(), 19);
     Assert.assertEquals(tracksByRating.get(4).size(), 14);
     Assert.assertEquals(tracksByRating.get(5).size(), 10);
