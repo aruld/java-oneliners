@@ -11,7 +11,7 @@ import static java.util.stream.Streams.intRange;
 public class Item2 {
 
   public static void main(String[] args) {
-    // Range is half-open (exclusive) in Java, unlike Scala.
+    // Range is half-open (exclusive) as in Python, unlike Scala.
     intRange(1, 1000).sum();
     intRange(1, 1000).reduce(0, Integer::sum);
     Streams.iterate(0, i -> i + 1).limit(1000).reduce(0, Integer::sum);
