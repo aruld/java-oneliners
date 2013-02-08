@@ -7,7 +7,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.*;
+import java.util.stream.CloseableStream;
 import java.util.stream.Streams;
 
 import static java.util.Comparators.comparing;
@@ -67,7 +70,12 @@ public class ItemTest {
     }
 
     try (BufferedReader reader = new BufferedReader(new FileReader(data))) {
-      List<String> fileLines = reader.lines().collect(toCollection(LinkedList::new));
+      List<String> fileLines = reader.lines().collect(toCollection(LinkedList<String>::new));
+      assertEquals(fileLines, expected);
+    }
+
+    try (CloseableStream<String> lines = Files.lines(data.toPath(), Charset.defaultCharset())) {
+      List<String> fileLines = lines.collect(toCollection(LinkedList<String>::new));
       assertEquals(fileLines, expected);
     }
   }
