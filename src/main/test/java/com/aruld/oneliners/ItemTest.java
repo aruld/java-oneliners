@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Stream.Downstream;
 import java.util.stream.Streams;
 
 import static java.util.Comparators.comparing;
@@ -156,7 +155,7 @@ public class ItemTest {
 
     // Merge tracks from all albums
     List<Track> allTracks = albums.stream()
-      .explode((Downstream<Track> downstream, Album element) -> downstream.send(element.tracks))
+      .flatMap((Album album) -> album.tracks.stream())
       .collect(toList());
     Assert.assertEquals(allTracks.size(), 43);
 
