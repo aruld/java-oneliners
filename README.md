@@ -15,10 +15,11 @@ I am trying to put best effort in making the code up-to-date with the latest JDK
 
 Check out the latest API docs [here](http://download.java.net/lambda/b77/docs/api/)
 
-Download the latest API [43 MB zip](http://www.java.net/download/lambda/b77/lambda-8-b77-apidocs-11_feb_2013.zip)
+Download the latest API [44 MB zip](http://www.java.net/download/lambda/b77/lambda-8-b77-apidocs-11_feb_2013.zip)
 
 Download the latest build [here](http://jdk8.java.net/lambda/)
 
-I use the best IDE in the Java world (Intellij 12) to develop these samples. It has incredible support for lambda and you'll never be disappointed.
+Latest Intellij 12.1 [EAP](http://confluence.jetbrains.com/display/IDEADEV/IDEA+12.1+EAP) has support for graph inference ( > b75).
+It has incredible support for lambda and you'll never be disappointed.
 
 Enjoy and watch this space for a fun ride!
