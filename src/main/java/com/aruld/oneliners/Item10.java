@@ -115,7 +115,7 @@ public class Item10 {
       .collect(toList());
 
     // Group album tracks by rating
-    Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
+    Map<Integer, List<Track>> tracksByRating = allTracks.stream()
       .collect(groupingBy(Track::getRating));
   }
 

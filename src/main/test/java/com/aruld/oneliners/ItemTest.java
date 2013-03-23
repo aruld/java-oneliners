@@ -82,7 +82,7 @@ public class ItemTest {
 
   @Test
   public void item6() {
-    Map<String, Collection<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
+    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);
@@ -168,7 +168,7 @@ public class ItemTest {
     Assert.assertEquals(allTracks.size(), 43);
 
     // Group album tracks by rating
-    Map<Integer, Collection<Track>> tracksByRating = allTracks.stream()
+    Map<Integer, List<Track>> tracksByRating = allTracks.stream()
       .collect(groupingBy(Track::getRating));
     Assert.assertEquals(tracksByRating.get(3).size(), 19);
     Assert.assertEquals(tracksByRating.get(4).size(), 14);
