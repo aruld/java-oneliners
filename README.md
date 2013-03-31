@@ -15,7 +15,7 @@ I am trying to put best effort in making the code up-to-date with the latest JDK
 
 Check out the latest API docs [here](http://download.java.net/lambda/b82/docs/api/)
 
-Download the latest API [44 MB zip](http://www.java.net/download/lambda/b82/lambda-8-b82-apidocs-18_mar_2013.zip)
+Download the latest API [44 MB zip](http://www.java.net/download/lambda/b83/lambda-8-b83-apidocs-25_mar_2013.zip)
 
 Download the latest build [here](http://jdk8.java.net/lambda/)
 
