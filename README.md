@@ -13,7 +13,7 @@ This work is licensed under the [Apache License, Version 2.0](http://www.apache.
 The project uses bleeding edge builds of JDK 8 [lambdas](http://openjdk.java.net/projects/lambda/).
 I am trying to put best effort in making the code up-to-date with the latest JDK 8 Collections lambdafication effort.
 
-Check out the latest API docs [here](http://download.java.net/lambda/b82/docs/api/)
+Check out the latest API docs [here](http://download.java.net/lambda/b94/docs/api/)
 
 Download the latest API [45 MB zip](http://www.java.net/download/lambda/b94/lambda-8-b94-apidocs-10_jun_2013.zip)
 
