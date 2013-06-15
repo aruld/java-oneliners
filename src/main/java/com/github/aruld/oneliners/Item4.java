@@ -1,4 +1,4 @@
-package com.aruld.oneliners;
+package com.github.aruld.oneliners;
 
 import java.io.BufferedReader;
 import java.io.File;

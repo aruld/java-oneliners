@@ -1,4 +1,4 @@
-package com.aruld.oneliners;
+package com.github.aruld.oneliners;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,8 +23,8 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
-import static com.aruld.oneliners.Item10.Album;
-import static com.aruld.oneliners.Item10.Track;
+import static com.github.aruld.oneliners.Item10.Album;
+import static com.github.aruld.oneliners.Item10.Track;
 
 public class ItemTest {
 

@@ -1,4 +1,4 @@
-package com.aruld.oneliners;
+package com.github.aruld.oneliners;
 
 import java.util.Arrays;
 import java.util.List;
