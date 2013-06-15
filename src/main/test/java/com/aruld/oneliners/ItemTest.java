@@ -11,14 +11,14 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.CloseableStream;
-import java.util.stream.Streams;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import static java.util.Comparators.comparing;
-import static java.util.function.Functions.forPredicate;
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Streams.intRange;
+import static java.util.stream.IntStream.range;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -30,10 +30,10 @@ public class ItemTest {
 
   @Test
   public void item1() {
-    int[] actual = intRange(1, 10).map(i -> i * 2).toArray();
+    int[] actual = range(1, 10).map(i -> i * 2).toArray();
     int[] expected = new int[]{2, 4, 6, 8, 10, 12, 14, 16, 18};
     assertArrayEquals(actual, expected);
-    List<Integer> actualList = intRange(1, 10).map(i -> i * 2).boxed().collect(toList());
+    List<Integer> actualList = range(1, 10).map(i -> i * 2).boxed().collect(toList());
     List<Integer> expectedList = Arrays.asList(2, 4, 6, 8, 10, 12, 14, 16, 18);
     Assert.assertEquals(actualList, expectedList);
   }
@@ -41,10 +41,10 @@ public class ItemTest {
   @Test
   public void item2() {
     int expected = 499500;
-    assertEquals(intRange(1, 1000).sum(), expected);
-    assertEquals(intRange(1, 1000).reduce(0, Integer::sum), expected);
-    assertEquals(Streams.iterate(0, i -> i + 1).limit(1000).reduce(0, Integer::sum).intValue(), expected);
-    assertEquals(Streams.iterateInt(0, i -> i + 1).limit(1000).reduce(0, Integer::sum), expected);
+    assertEquals(range(1, 1000).sum(), expected);
+    assertEquals(range(1, 1000).reduce(0, Integer::sum), expected);
+    assertEquals(Stream.iterate(0, i -> i + 1).limit(1000).reduce(0, Integer::sum).intValue(), expected);
+    assertEquals(IntStream.iterate(0, i -> i + 1).limit(1000).reduce(0, Integer::sum), expected);
   }
 
   @Test
@@ -82,7 +82,7 @@ public class ItemTest {
 
   @Test
   public void item6() {
-    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(forPredicate((Integer i) -> i > 60, "passed", "failed")));
+    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(Item6.forPredicate((Integer i) -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);

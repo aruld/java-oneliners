@@ -2,7 +2,7 @@ package com.aruld.oneliners;
 
 import java.util.*;
 
-import static java.util.Comparators.comparing;
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
