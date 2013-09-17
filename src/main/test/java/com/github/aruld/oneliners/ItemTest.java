@@ -54,7 +54,7 @@ public class ItemTest {
     final String tweet = "The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml";
 
     assertTrue(keywords.stream().anyMatch(tweet::contains));
-    assertTrue(keywords.stream().reduce(false, (Boolean b, String keyword) -> b || tweet.contains(keyword), (l, r) -> l || r));
+    assertTrue(keywords.stream().reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r));
 
   }
 
@@ -82,7 +82,7 @@ public class ItemTest {
 
   @Test
   public void item6() {
-    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(Item6.forPredicate((Integer i) -> i > 60, "passed", "failed")));
+    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(Item6.forPredicate(i -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);
@@ -158,18 +158,15 @@ public class ItemTest {
     // Print the names of albums that have at least one track rated four or higher, sorted by name.
     Assert.assertEquals(albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
-      .sorted(comparing((Album album) -> album.name))
+      .sorted(comparing(album -> album.name))
       .map(a -> a.name).collect(toList()), Arrays.asList("Red", "Tailgates & Tanlines", "Unapologetic"));
 
     // Merge tracks from all albums
-    List<Track> allTracks = albums.stream()
-      .flatMap((Album album) -> album.tracks.stream())
-      .collect(toList());
+    List<Track> allTracks = albums.stream().flatMap(album -> album.tracks.stream()).collect(toList());
     Assert.assertEquals(allTracks.size(), 43);
 
     // Group album tracks by rating
-    Map<Integer, List<Track>> tracksByRating = allTracks.stream()
-      .collect(groupingBy(Track::getRating));
+    Map<Integer, List<Track>> tracksByRating = allTracks.stream().collect(groupingBy(Track::getRating));
     Assert.assertEquals(tracksByRating.get(3).size(), 19);
     Assert.assertEquals(tracksByRating.get(4).size(), 14);
     Assert.assertEquals(tracksByRating.get(5).size(), 10);

@@ -106,12 +106,12 @@ public class Item10 {
     // Print the names of albums that have at least one track rated four or higher, sorted by name.
     albums.stream()
       .filter(a -> a.tracks.stream().anyMatch(t -> (t.rating >= 4)))
-      .sorted(comparing((Album album) -> album.name))
+      .sorted(comparing(album -> album.name))
       .forEach(album -> System.out.println(album.name));
 
     // Merge tracks from all albums
     List<Track> allTracks = albums.stream()
-      .flatMap((Album album) -> album.tracks.stream())
+      .flatMap(album -> album.tracks.stream())
       .collect(toList());
 
     // Group album tracks by rating
