@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.CloseableStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
 
@@ -25,7 +25,7 @@ public class Item4 {
       List<String> fileLines = reader.lines().collect(toCollection(LinkedList<String>::new));
     }
 
-    try (CloseableStream<String> lines = Files.lines(new File("data.txt").toPath(), Charset.defaultCharset())) {
+    try (Stream<String> lines = Files.lines(new File("data.txt").toPath(), Charset.defaultCharset())) {
       List<String> fileLines = lines.collect(toCollection(LinkedList<String>::new));
     }
 

@@ -10,7 +10,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.*;
-import java.util.stream.CloseableStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -74,7 +73,7 @@ public class ItemTest {
       assertEquals(fileLines, expected);
     }
 
-    try (CloseableStream<String> lines = Files.lines(data.toPath(), Charset.defaultCharset())) {
+    try (Stream<String> lines = Files.lines(data.toPath(), Charset.defaultCharset())) {
       List<String> fileLines = lines.collect(toCollection(LinkedList<String>::new));
       assertEquals(fileLines, expected);
     }
