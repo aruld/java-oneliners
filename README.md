@@ -9,9 +9,10 @@ Here is my take of the one-liners using Java 8: https://github.com/aruld/java-on
 ## References
 
 Must read documents on the new language features in Java SE 8 and motivation for Collections library enhancements
-State of the Lambda (http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html)
-State of the Lambda: Libraries Edition (http://cr.openjdk.java.net/~briangoetz/lambda/lambda-libraries-final.html)
-Streams API Specification (http://download.java.net/jdk8/docs/api/java/util/stream/package-summary.html)
+
+- [State of the Lambda](http://cr.openjdk.java.net/~briangoetz/lambda/lambda-state-final.html)
+- [State of the Lambda: Libraries Edition](http://cr.openjdk.java.net/~briangoetz/lambda/lambda-libraries-final.html)
+- [Streams API Specification](http://download.java.net/jdk8/docs/api/java/util/stream/package-summary.html)
 
 ## Overview
 
