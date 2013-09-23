@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Find the names of albums that have at least one track rated four or higher, sorted by name.
  * <p/>
- * Reference: http://cr.openjdk.java.net/~briangoetz/lambda/sotc3.html
+ * Reference: http://cr.openjdk.java.net/~briangoetz/lambda/lambda-libraries-final.html
  */
 public class Item10 {
 
