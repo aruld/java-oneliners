@@ -49,11 +49,11 @@ public class ItemTest {
   @Test
   public void item3() {
 
-    final List<String> keywords = Arrays.asList("brown", "fox", "dog", "pangram");
+    final Stream<String> keywords = Stream.of("brown", "fox", "dog", "pangram");
     final String tweet = "The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml";
 
-    assertTrue(keywords.stream().anyMatch(tweet::contains));
-    assertTrue(keywords.stream().reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r));
+    assertTrue(keywords.anyMatch(tweet::contains));
+    assertTrue(keywords.reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r));
 
   }
 
@@ -81,7 +81,7 @@ public class ItemTest {
 
   @Test
   public void item6() {
-    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(Item6.forPredicate(i -> i > 60, "passed", "failed")));
+    Map<String, List<Integer>> result = Stream.of(49, 58, 76, 82, 88, 90).collect(groupingBy(Item6.forPredicate(i -> i > 60, "passed", "failed")));
 
     Collection<Integer> expected = Arrays.asList(76, 82, 88, 90);
     assertEquals(result.get("passed"), expected);
@@ -90,14 +90,14 @@ public class ItemTest {
 
   @Test
   public void item8() {
-    int min = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::min).get();
+    int min = Stream.of(14, 35, -7, 46, 98).reduce(Integer::min).get();
     assertEquals(min, -7);
-    min = Arrays.asList(14, 35, -7, 46, 98).stream().min(Integer::compare).get();
+    min = Stream.of(14, 35, -7, 46, 98).min(Integer::compare).get();
     assertEquals(min, -7);
 
-    int max = Arrays.asList(14, 35, -7, 46, 98).stream().reduce(Integer::max).get();
+    int max = Stream.of(14, 35, -7, 46, 98).reduce(Integer::max).get();
     assertEquals(max, 98);
-    max = Arrays.asList(14, 35, -7, 46, 98).stream().max(Integer::compare).get();
+    max = Stream.of(14, 35, -7, 46, 98).max(Integer::compare).get();
     assertEquals(max, 98);
   }
 

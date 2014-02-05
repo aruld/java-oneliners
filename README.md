@@ -10,9 +10,9 @@ Here is my take of the one-liners using Java 8: https://github.com/aruld/java-on
 
 Download the latest JDK 8 build [here](https://jdk8.java.net/download.html)
 
-Download the latest API documentation [62 MB zip](http://www.java.net/download/jdk8/archive/b121/binaries/jdk-8-ea-docs-b121-all-19_dec_2013.zip)
+Download the latest API documentation [84 MB zip](http://www.java.net/download/jdk8/archive/b128/binaries/jdk-8-fcs-docs-b128-all-01_feb_2014.zip)
 
-Developed with [Intellj IDEA 12](http://www.jetbrains.com/idea/download/)
+Developed with [Intellj IDEA 13](http://www.jetbrains.com/idea/download/)
 
 ## References
 

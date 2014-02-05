@@ -1,11 +1,11 @@
 package com.github.aruld.oneliners;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.groupingBy;
 public class Item6 {
 
   public static void main(String[] args) {
-    Map<String, List<Integer>> result = Arrays.asList(49, 58, 76, 82, 88, 90).stream().collect(groupingBy(forPredicate(i -> i > 60, "passed", "failed")));
+    Map<String, List<Integer>> result = Stream.of(49, 58, 76, 82, 88, 90).collect(groupingBy(forPredicate(i -> i > 60, "passed", "failed")));
   }
 
   /**
