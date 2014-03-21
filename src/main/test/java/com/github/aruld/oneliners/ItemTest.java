@@ -49,11 +49,11 @@ public class ItemTest {
   @Test
   public void item3() {
 
-    final Stream<String> keywords = Stream.of("brown", "fox", "dog", "pangram");
+    final List<String> keywords = Arrays.asList("brown", "fox", "dog", "pangram");
     final String tweet = "The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml";
 
-    assertTrue(keywords.anyMatch(tweet::contains));
-    assertTrue(keywords.reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r));
+    assertTrue(keywords.stream().anyMatch(tweet::contains));
+    assertTrue(keywords.stream().reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r));
 
   }
 

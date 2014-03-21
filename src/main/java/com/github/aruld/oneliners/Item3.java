@@ -1,6 +1,7 @@
 package com.github.aruld.oneliners;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Verify if Exists in a String
@@ -9,11 +10,11 @@ public class Item3 {
 
   public static void main(String[] args) {
 
-    final Stream<String> keywords = Stream.of("brown", "fox", "dog", "pangram");
+    final List<String> keywords = Arrays.asList("brown", "fox", "dog", "pangram");
     final String tweet = "The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml";
 
-    keywords.anyMatch(tweet::contains);
-    keywords.reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r);
+    keywords.stream().anyMatch(tweet::contains);
+    keywords.stream().reduce(false, (b, keyword) -> b || tweet.contains(keyword), (l, r) -> l || r);
   }
 
 }
